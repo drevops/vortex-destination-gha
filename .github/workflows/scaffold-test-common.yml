@@ -73,7 +73,7 @@ jobs:
           path: /tmp/.scaffold-coverage-html
 
       - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v4.5.0
         with:
           directory: /tmp/.scaffold-coverage-html
           fail_ci_if_error: true
@@ -126,7 +126,7 @@ jobs:
           path: /tmp/.scaffold-coverage-html
 
       - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v4.5.0
         with:
           directory: /tmp/.scaffold-coverage-html
           fail_ci_if_error: true
@@ -188,7 +188,7 @@ jobs:
           path: /tmp/.scaffold-coverage-html
 
       - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v4.5.0
         with:
           directory: /tmp/.scaffold-coverage-html
           fail_ci_if_error: true

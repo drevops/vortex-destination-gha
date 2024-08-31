@@ -142,7 +142,7 @@ load _helper.deployment.bash
     "y"         # preserve_lagoon
     "n"         # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
 
   # Do not build - only structure.
@@ -241,7 +241,7 @@ load _helper.deployment.bash
     "y"         # preserve_lagoon
     "n"         # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
 
   # Do not build - only structure.

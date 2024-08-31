@@ -14,7 +14,7 @@ load _helper.bash
 @test "Install parameters: empty dir; proceed switch; quiet" {
   export VORTEX_INSTALL_PROCEED=0
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
   assert_output_contains "Aborting project installation. No files were changed"
   assert_files_not_present_common
 }
@@ -42,10 +42,10 @@ load _helper.bash
     "nothing"   # preserve_lagoon
     "nothing"   # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_output_contains "Aborting project installation. No files were changed"
   assert_files_not_present_common
 }
@@ -54,7 +54,7 @@ load _helper.bash
   export VORTEX_INSTALL_PROCEED=0
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
   assert_output_contains "Aborting project installation. No files were changed"
 
   assert_output_contains "                          Name:  Star wars     "
@@ -76,7 +76,7 @@ load _helper.bash
   assert_output_contains "            Lagoon integration:  Disabled      "
   assert_output_contains "       RenovateBot integration:  Enabled       "
   assert_output_contains "     Preserve docs in comments:  Yes           "
-  assert_output_contains "     Preserve DrevOps comments:  No            "
+  assert_output_contains "      Preserve Vortex comments:  No            "
 }
 
 @test "Install parameters: empty dir; defaults; interactive" {
@@ -101,10 +101,10 @@ load _helper.bash
     "nothing"   # preserve_lagoon
     "nothing"   # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_output_contains "Aborting project installation. No files were changed"
 
   assert_output_contains "                          Name:  Star wars     "
@@ -126,7 +126,7 @@ load _helper.bash
   assert_output_contains "            Lagoon integration:  Disabled      "
   assert_output_contains "       RenovateBot integration:  Enabled       "
   assert_output_contains "     Preserve docs in comments:  Yes           "
-  assert_output_contains "     Preserve DrevOps comments:  No            "
+  assert_output_contains "      Preserve Vortex comments:  No            "
 }
 
 # Note that there is no quiet test for this scenario.
@@ -154,10 +154,10 @@ load _helper.bash
     "nah"                    # preserve_lagoon
     "never"                  # preserve_renovatebot
     "nnnooo"                 # preserve_doc_comments
-    "nooo"                   # preserve_drevops_info
+    "nooo"                   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_output_contains "Aborting project installation. No files were changed."
 
   assert_output_contains "                          Name:  Star wars              "
@@ -179,7 +179,7 @@ load _helper.bash
   assert_output_contains "            Lagoon integration:  Disabled               "
   assert_output_contains "       RenovateBot integration:  Disabled               "
   assert_output_contains "     Preserve docs in comments:  No                     "
-  assert_output_contains "     Preserve DrevOps comments:  No                     "
+  assert_output_contains "      Preserve Vortex comments:  No                     "
 }
 
 @test "Install parameters: empty dir; overrides and normalisation; interactive; custom webroot" {
@@ -206,10 +206,10 @@ load _helper.bash
     "nah"                    # preserve_lagoon
     "never"                  # preserve_renovatebot
     "nnnooo"                 # preserve_doc_comments
-    "nooo"                   # preserve_drevops_info
+    "nooo"                   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_output_contains "Aborting project installation. No files were changed."
 
   assert_output_contains "                          Name:  Star wars              "
@@ -231,7 +231,7 @@ load _helper.bash
   assert_output_contains "            Lagoon integration:  Disabled               "
   assert_output_contains "       RenovateBot integration:  Disabled               "
   assert_output_contains "     Preserve docs in comments:  No                     "
-  assert_output_contains "     Preserve DrevOps comments:  No                     "
+  assert_output_contains "      Preserve Vortex comments:  No                     "
 }
 
 @test "Install parameters: pre-installed; overrides, normalisation and discovery; quiet" {
@@ -240,7 +240,7 @@ load _helper.bash
   fixture_preinstalled web
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
   assert_output_contains "Aborting project installation. No files were changed"
 
   assert_output_contains "                          Name:  Resistance new site          "
@@ -262,7 +262,7 @@ load _helper.bash
   assert_output_contains "            Lagoon integration:  Enabled                      "
   assert_output_contains "       RenovateBot integration:  Enabled                      "
   assert_output_contains "     Preserve docs in comments:  Yes                          "
-  assert_output_contains "     Preserve DrevOps comments:  Yes                          "
+  assert_output_contains "      Preserve Vortex comments:  Yes                          "
 }
 
 @test "Install parameters: pre-installed; overrides, normalisation and discovery; interactive; accepting suggested values" {
@@ -290,10 +290,10 @@ load _helper.bash
     "nothing" # preserve_lagoon
     "nothing" # preserve_renovatebot
     "nothing" # preserve_doc_comments
-    "nothing" # preserve_drevops_info
+    "nothing" # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_output_contains "Aborting project installation. No files were changed"
 
   # Note that user input takes precedence over discovered values.
@@ -316,7 +316,7 @@ load _helper.bash
   assert_output_contains "            Lagoon integration:  Enabled                      "
   assert_output_contains "       RenovateBot integration:  Enabled                      "
   assert_output_contains "     Preserve docs in comments:  Yes                          "
-  assert_output_contains "     Preserve DrevOps comments:  Yes                          "
+  assert_output_contains "      Preserve Vortex comments:  Yes                          "
 }
 
 @test "Install parameters: pre-installed; overrides, normalisation and discovery; interactive; user input overrides discovery which overrides defaults" {
@@ -348,12 +348,12 @@ load _helper.bash
     "nah"                    # preserve_lagoon
     "nothing"                # preserve_renovatebot - testing NOTHING value - should be 'Enabled as exists in fixture.
     "n"                      # preserve_doc_comments
-    "n"                      # preserve_drevops_info
+    "n"                      # preserve_vortex_info
   )
 
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
-  assert_output_contains "It looks like DrevOps scaffold is already installed into this project."
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
+  assert_output_contains "It looks like Vortex scaffold is already installed into this project."
   assert_output_contains "Aborting project installation. No files were changed"
 
   # Note that user input takes precedence over discovered values.
@@ -376,7 +376,7 @@ load _helper.bash
   assert_output_contains "            Lagoon integration:  Disabled               "
   assert_output_contains "       RenovateBot integration:  Enabled                "
   assert_output_contains "     Preserve docs in comments:  No                     "
-  assert_output_contains "     Preserve DrevOps comments:  No                     "
+  assert_output_contains "      Preserve Vortex comments:  No                     "
 }
 
 #
@@ -388,7 +388,7 @@ load _helper.bash
 fixture_preinstalled() {
   local webroot="${1:-web}"
 
-  # Create readme file to pretend that DrevOps was installed.
+  # Create readme file to pretend that Vortex was installed.
   create_fixture_readme
 
   # Sets 'name' to 'Resistance new site'.
@@ -428,6 +428,6 @@ fixture_preinstalled() {
   # Sets 'preserve_doc_comments' to 'Yes'.
   echo "# Ahoy configuration file." >>.ahoy.yml
 
-  # Sets 'preserve_drevops_info' to 'Yes'.
+  # Sets 'preserve_vortex_info' to 'Yes'.
   echo "# Comments starting with '#:' provide explicit documentation and will be" >>.ahoy.yml
 }

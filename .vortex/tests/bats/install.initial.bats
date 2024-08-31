@@ -7,7 +7,7 @@
 load _helper.bash
 
 @test "Variables" {
-  assert_contains "drevops" "${BUILD_DIR}"
+  assert_contains "vortex" "${BUILD_DIR}"
 }
 
 @test "Install into empty directory only" {
@@ -63,21 +63,21 @@ load _helper.bash
   assert_files_present
   assert_git_repo
 
-  # Releasing 2 new versions of DrevOps.
+  # Releasing 2 new versions of Vortex.
   echo "# Some change to docker-compose.yml at commit 1" >>"${LOCAL_REPO_DIR}/docker-compose.yml"
   git_add "docker-compose.yml" "${LOCAL_REPO_DIR}"
-  commit1=$(git_commit "New version 1 of DrevOps" "${LOCAL_REPO_DIR}")
+  commit1=$(git_commit "New version 1 of Vortex" "${LOCAL_REPO_DIR}")
 
   echo "# Some change to docker-compose.yml at commit 2" >>"${LOCAL_REPO_DIR}/docker-compose.yml"
   git_add "docker-compose.yml" "${LOCAL_REPO_DIR}"
-  git_commit "New version 2 of DrevOps" "${LOCAL_REPO_DIR}"
+  git_commit "New version 2 of Vortex" "${LOCAL_REPO_DIR}"
 
   # Requiring bespoke version by commit.
   echo VORTEX_INSTALL_COMMIT="${commit1}" >>.env
   run_installer_quiet
   assert_git_repo
-  assert_output_contains "This will install DrevOps scaffold into your project at commit"
-  assert_output_contains "Downloading DrevOps"
+  assert_output_contains "This will install Vortex scaffold into your project at commit"
+  assert_output_contains "Downloading Vortex"
   assert_output_contains "at ref \"${commit1}\""
 
   assert_files_present
@@ -114,10 +114,10 @@ load _helper.bash
     "nothing"   # preserve_lagoon
     "nothing"   # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
 
   assert_files_present
   assert_git_repo
@@ -147,10 +147,10 @@ load _helper.bash
     "nothing"   # preserve_lagoon
     "nothing"   # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
 
   assert_files_present
   assert_git_repo
@@ -158,16 +158,16 @@ load _helper.bash
   assert_file_not_contains ".env" "SOMEVAR="
 }
 
-@test "Install into empty directory: quiet; should NOT show that DrevOps was previously installed" {
+@test "Install into empty directory: quiet; should NOT show that Vortex was previously installed" {
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex scaffold is already installed into this project"
 
   assert_files_present
   assert_git_repo
 }
 
-@test "Install into empty directory: interactive; should show that DrevOps was previously installed" {
+@test "Install into empty directory: interactive; should show that Vortex was previously installed" {
   answers=(
     "Star wars" # name
     "nothing"   # machine_name
@@ -189,22 +189,22 @@ load _helper.bash
     "nothing"   # preserve_lagoon
     "nothing"   # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
+  assert_output_not_contains "It looks like Vortex scaffold is already installed into this project"
 
   assert_files_present
   assert_git_repo
 }
 
-@test "Install into empty directory; DrevOps badge version set" {
+@test "Install into empty directory; Vortex badge version set" {
   export VORTEX_VERSION="1.2.3"
 
   run_installer_quiet
 
-  # Assert that DrevOps version was replaced.
+  # Assert that Vortex version was replaced.
   assert_file_contains "README.md" "https://github.com/drevops/scaffold/tree/1.2.3"
   assert_file_contains "README.md" "badge/Vortex-1.2.3-blue.svg"
 }

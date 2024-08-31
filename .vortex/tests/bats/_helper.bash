@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Helpers related to DrevOps common testing functionality.
+# Helpers related to Vortex common testing functionality.
 #
 # In some cases, shell may report platform incorrectly. Run with forced platform:
 # DOCKER_DEFAULT_PLATFORM=linux/amd64 bats --tap tests/bats/test.bats
@@ -88,13 +88,13 @@ setup() {
   # empty (to facilitate brand-new install).
   export CURRENT_PROJECT_DIR="${BUILD_DIR}/star_wars"
 
-  # Directory where DrevOps may be installed into.
+  # Directory where Vortex may be installed into.
   # By default, install uses ${CURRENT_PROJECT_DIR} as a destination, but we use
   # ${DST_PROJECT_DIR} to test a scenario where different destination is provided.
   export DST_PROJECT_DIR="${BUILD_DIR}/dst"
 
-  # Directory where the installer script will be sourcing the instance of DrevOps.
-  # As a part of test setup, the local copy of DrevOps at the last commit is
+  # Directory where the installer script will be sourcing the instance of Vortex.
+  # As a part of test setup, the local copy of Vortex at the last commit is
   # copied to this location. This means that during development of tests local
   # changes need to be committed.
   export LOCAL_REPO_DIR="${BUILD_DIR}/local_repo"
@@ -153,7 +153,7 @@ setup() {
   ## Phase 5: SUT files setup.
   ##
 
-  # Copy DrevOps at the last commit.
+  # Copy Vortex at the last commit.
   prepare_local_repo "${LOCAL_REPO_DIR}" >/dev/null
 
   # Prepare global git config and ignore files required for testing cleanup scenarios.
@@ -242,8 +242,8 @@ assert_files_present_common() {
 
   pushd "${dir}" >/dev/null || exit 1
 
-  # Default DrevOps files present.
-  assert_files_present_drevops "${dir}"
+  # Default Vortex files present.
+  assert_files_present_vortex "${dir}"
 
   # Assert that project name is correct.
   assert_file_contains .env "VORTEX_PROJECT=${suffix}"
@@ -305,7 +305,7 @@ assert_files_not_present_common() {
 }
 
 # These files should exist in every project.
-assert_files_present_drevops() {
+assert_files_present_vortex() {
   local dir="${1:-$(pwd)}"
 
   pushd "${dir}" >/dev/null || exit 1
@@ -352,7 +352,7 @@ assert_files_present_drevops() {
   assert_file_exists "scripts/composer/ScriptHandler.php"
   assert_file_exists "scripts/custom/.gitkeep"
 
-  # Core DrevOps files.
+  # Core Vortex files.
   assert_file_exists "scripts/vortex/deploy.sh"
   assert_file_exists "scripts/vortex/deploy-artifact.sh"
   assert_file_exists "scripts/vortex/deploy-container-registry.sh"
@@ -414,7 +414,7 @@ assert_files_present_drevops() {
   assert_file_exists "docs/releasing.md"
   assert_file_exists "docs/testing.md"
 
-  # Assert that DrevOps files removed.
+  # Assert that Vortex files removed.
   assert_dir_not_exists ".vortex"
   assert_file_not_exists "LICENSE"
   assert_file_not_exists "CODE_OF_CONDUCT.md"
@@ -438,7 +438,7 @@ assert_files_present_drevops() {
   assert_file_not_contains ".circleci/config.yml" "vortex-dev-installer"
 
   # Assert that documentation was processed correctly.
-  assert_file_not_contains README.md "# DrevOps"
+  assert_file_not_contains README.md "# Vortex"
   assert_dir_not_contains_string "${dir}" "/\.vortex"
 
   popd >/dev/null || exit 1
@@ -903,9 +903,9 @@ Drupal 10 implementation of ${name} for ${org}
 
 [![CircleCI](https://circleci.com/gh/your_org/your_site.svg?style=shield)](https://circleci.com/gh/your_org/your_site)
 
-[//]: # (DO NOT REMOVE THE BADGE BELOW. IT IS USED BY DREVOPS TO TRACK INTEGRATION)
+[//]: # (DO NOT REMOVE THE BADGE BELOW. IT IS USED BY VORTEX TO TRACK INTEGRATION)
 
-[![DrevOps](https://img.shields.io/badge/DrevOps-VORTEX_VERSION_URLENCODED-blue.svg)](https://github.com/drevops/scaffold/tree/VORTEX_VERSION)
+[![Vortex](https://img.shields.io/badge/Vortex-VORTEX_VERSION_URLENCODED-blue.svg)](https://github.com/drevops/scaffold/tree/VORTEX_VERSION)
 
 some other text
 EOT
@@ -939,7 +939,7 @@ run_installer_quiet() {
   export VORTEX_INSTALL_LOCAL_REPO="${LOCAL_REPO_DIR}"
 
   # Use unique installer temporary directory for each run. This is where
-  # the installer script downloads the DrevOps codebase for processing.
+  # the installer script downloads the Vortex codebase for processing.
   VORTEX_INSTALL_TMP_DIR="${APP_TMP_DIR}/$(random_string)"
   fixture_prepare_dir "${VORTEX_INSTALL_TMP_DIR}"
   export VORTEX_INSTALL_TMP_DIR
@@ -998,7 +998,7 @@ run_installer_quiet() {
 #   "nothing" # preserve_lagoon
 #   "nothing" # preserve_renovatebot
 #   "nothing" # preserve_doc_comments
-#   "nothing" # preserve_drevops_info
+#   "nothing" # preserve_vortex_info
 # )
 # output=$(run_install_interactive "${answers[@]}")
 # @endcode
@@ -1348,7 +1348,7 @@ process_ahoyyml() {
   # when they run `ahoy build` locally.
   local sed_opts
   sed_opts=(-i) && [ "$(uname)" = "Darwin" ] && sed_opts=(-i '')
-  sed "${sed_opts[@]}" 's|cmd: ahoy cli ./scripts/vortex/provision.sh|cmd: if [ -f .data/db.sql ]; then docker compose exec cli mkdir -p .data; docker compose cp -L .data/db.sql cli:/app/.data/db.sql; fi; ahoy cli \.\/scripts\/drevops\/provision\.sh|g' .ahoy.yml
+  sed "${sed_opts[@]}" 's|cmd: ahoy cli ./scripts/vortex/provision.sh|cmd: if [ -f .data/db.sql ]; then docker compose exec cli mkdir -p .data; docker compose cp -L .data/db.sql cli:/app/.data/db.sql; fi; ahoy cli \.\/scripts\/vortex\/provision\.sh|g' .ahoy.yml
 }
 
 setup_ssh_key_fixture() {

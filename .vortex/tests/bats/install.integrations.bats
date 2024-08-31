@@ -28,10 +28,10 @@ load _helper.bash
     "no"        # preserve_lagoon
     "no"        # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_git_repo
 
   install_dependencies_stub
@@ -66,10 +66,10 @@ load _helper.bash
     "y"         # preserve_lagoon
     "y"         # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_git_repo
 
   install_dependencies_stub
@@ -108,10 +108,10 @@ load _helper.bash
     "y"         # preserve_lagoon
     "y"         # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_git_repo
 
   install_dependencies_stub
@@ -148,10 +148,10 @@ load _helper.bash
     "n"         # preserve_lagoon
     "n"         # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_git_repo
 
   install_dependencies_stub
@@ -184,10 +184,10 @@ load _helper.bash
     "y"         # preserve_lagoon
     "n"         # preserve_renovatebot
     "nothing"   # preserve_doc_comments
-    "nothing"   # preserve_drevops_info
+    "nothing"   # preserve_vortex_info
   )
   output=$(run_installer_interactive "${answers[@]}")
-  assert_output_contains "WELCOME TO DREVOPS INTERACTIVE INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
   assert_git_repo
 
   install_dependencies_stub

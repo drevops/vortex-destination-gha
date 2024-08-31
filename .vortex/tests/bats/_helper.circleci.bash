@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154,SC2129
 #
-# Helpers related to DrevOps CircleCI testing functionality.
+# Helpers related to Vortex CircleCI testing functionality.
 #
 
 #

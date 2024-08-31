@@ -8,7 +8,7 @@ load _helper.bash
 
 @test "Install into existing: non-git-project; custom files; custom files preserved" {
   touch "test1.txt"
-  # File resides in directory that is included in DrevOps when initialised.
+  # File resides in directory that is included in Vortex when initialised.
   mkdir -p ".docker"
   touch ".docker/test2.txt"
 
@@ -18,7 +18,7 @@ load _helper.bash
 
   # Assert that custom file preserved.
   assert_file_exists "test1.txt"
-  # Assert that custom file in a directory used by DrevOps is preserved.
+  # Assert that custom file in a directory used by Vortex is preserved.
   assert_file_exists ".docker/test2.txt"
 }
 
@@ -34,7 +34,7 @@ load _helper.bash
 
   # Add custom files
   touch "test1.txt"
-  # File resides in directory that is included in DrevOps when initialised.
+  # File resides in directory that is included in Vortex when initialised.
   mkdir -p ".docker"
   touch ".docker/test2.txt"
 
@@ -49,7 +49,7 @@ load _helper.bash
 
   # Assert that custom file preserved.
   assert_file_exists "test1.txt"
-  # Assert that custom file in a directory used by DrevOps is preserved.
+  # Assert that custom file in a directory used by Vortex is preserved.
   assert_file_exists ".docker/test2.txt"
 }
 
@@ -65,7 +65,7 @@ load _helper.bash
 
   # Add custom files
   touch "test1.txt"
-  # File resides in directory that is included in DrevOps when initialised.
+  # File resides in directory that is included in Vortex when initialised.
   mkdir -p ".docker"
   touch ".docker/test2.txt"
 
@@ -80,7 +80,7 @@ load _helper.bash
 
   # Assert that custom file preserved.
   assert_file_exists "test1.txt"
-  # Assert that custom file in a directory used by DrevOps is preserved.
+  # Assert that custom file in a directory used by Vortex is preserved.
   assert_file_exists ".docker/test2.txt"
 
   # Assert no changes were introduced.
@@ -99,11 +99,11 @@ load _helper.bash
 
   # Add custom files
   touch "test1.txt"
-  # File resides in directory that is included in DrevOps when initialised.
+  # File resides in directory that is included in Vortex when initialised.
   mkdir -p ".docker"
   touch ".docker/test2.txt"
 
-  # Modify DrevOps files.
+  # Modify Vortex files.
   echo 'SOMEVAR="someval"' >>.env
 
   git_add ".env"
@@ -122,20 +122,20 @@ load _helper.bash
 
   # Assert that custom file preserved.
   assert_file_exists "test1.txt"
-  # Assert that custom file in a directory used by DrevOps is preserved.
+  # Assert that custom file in a directory used by Vortex is preserved.
   assert_file_exists ".docker/test2.txt"
 
-  # Assert changes were introduced, since DrevOps files have overridden
+  # Assert changes were introduced, since Vortex files have overridden
   # existing files.
   assert_not_contains "nothing to commit, working tree clean" "$(git status)"
   assert_contains "modified:   .env" "$(git status)"
   assert_file_not_contains ".env" 'SOMEVAR="someval"'
 }
 
-@test "Install into existing: git project; no DrevOps; adding DrevOps and updating DrevOps" {
+@test "Install into existing: git project; no Vortex; adding DrevOps and updating DrevOps" {
   # Add custom files
   touch "test1.txt"
-  # File resides in directory that is included in DrevOps when initialised.
+  # File resides in directory that is included in Vortex when initialised.
   mkdir -p ".docker"
   touch ".docker/test2.txt"
 
@@ -158,20 +158,20 @@ load _helper.bash
 
   # Assert that custom file preserved.
   assert_file_exists "test1.txt"
-  # Assert that custom file in a directory used by DrevOps is preserved.
+  # Assert that custom file in a directory used by Vortex is preserved.
   assert_file_exists ".docker/test2.txt"
 
   # Assert no changes were introduced.
   assert_git_clean
 
-  # Releasing new version of DrevOps.
+  # Releasing new version of Vortex.
   echo "# Some change to docker-compose.yml" >>"${LOCAL_REPO_DIR}/docker-compose.yml"
   git_add "docker-compose.yml" "${LOCAL_REPO_DIR}"
   echo "# Some change to non-required file" >>"${LOCAL_REPO_DIR}/web/themes/custom/your_site_theme/.eslintrc.json"
   git_add "web/themes/custom/your_site_theme/.eslintrc.json" "${LOCAL_REPO_DIR}"
   git_commit "New version of DrevOps" "${LOCAL_REPO_DIR}"
 
-  # Run install to update to the latest DrevOps version.
+  # Run install to update to the latest Vortex version.
   run_installer_quiet
   assert_files_present
   assert_git_repo
@@ -189,7 +189,7 @@ load _helper.bash
 
 @test "Install into existing: custom files, not including readme; discovery; quiet" {
   touch "test1.txt"
-  # File resides in directory that is included in DrevOps when initialised.
+  # File resides in directory that is included in Vortex when initialised.
   mkdir -p ".docker"
   touch ".docker/test2.txt"
 
@@ -206,13 +206,13 @@ load _helper.bash
 @test "Install into existing: custom files, including custom readme; discovery; quiet" {
   echo "some random content" >>"README.md"
   touch "test1.txt"
-  # File resides in directory that is included in DrevOps when initialised.
+  # File resides in directory that is included in Vortex when initialised.
   mkdir -p ".docker"
   touch ".docker/test2.txt"
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   install_dependencies_stub
 
@@ -220,17 +220,17 @@ load _helper.bash
   assert_git_repo
 }
 
-@test "Install into existing: custom files, including DrevOps's readme; discovery; quiet" {
+@test "Install into existing: custom files, including Vortex's readme; discovery; quiet" {
   create_fixture_readme
 
   touch "test1.txt"
-  # File resides in directory that is included in DrevOps when initialised.
+  # File resides in directory that is included in Vortex when initialised.
   mkdir -p ".docker"
   touch ".docker/test2.txt"
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_contains "It looks like Vortex is already installed into this project"
 
   install_dependencies_stub
 
@@ -243,8 +243,8 @@ load _helper.bash
 @test "Install into existing: previously installed project, including correct readme; discovery; quiet" {
   # Populate current dir with a project at current version.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   # Assert files at current version.
   assert_files_present
@@ -263,8 +263,8 @@ load _helper.bash
 
   # Run the installer again.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_contains "It looks like Vortex is already installed into this project"
 
   assert_files_present_common
   assert_git_repo
@@ -276,8 +276,8 @@ load _helper.bash
 @test "Install into existing: previously installed project, including updated .env.local; discovery; quiet" {
   # Populate current dir with a project at current version.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   # Assert files at current version.
   assert_files_present
@@ -298,8 +298,8 @@ load _helper.bash
 
   # Run the installer again.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_contains "It looks like Vortex is already installed into this project"
 
   assert_files_present_common
   assert_git_repo
@@ -313,8 +313,8 @@ load _helper.bash
 
   # Populate current dir with a project at current version.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 
@@ -328,8 +328,8 @@ load _helper.bash
 
   # Populate current dir with a project at current version.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 
@@ -341,8 +341,8 @@ load _helper.bash
 @test "Install into existing: previously installed project; custom profile; discovery; quiet" {
   # Populate current dir with a project at current version.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   # Assert files at current version.
   assert_files_present
@@ -354,8 +354,8 @@ load _helper.bash
 
   # Populate current dir with a project at current version.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 
@@ -369,8 +369,8 @@ load _helper.bash
 
   # Populate current dir with a project at current version.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 
@@ -390,8 +390,8 @@ load _helper.bash
 
   # Populate current dir with a project at current version.
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 
@@ -412,8 +412,8 @@ load _helper.bash
   echo "VORTEX_DEPLOY_TYPES=lagoon" >>".env"
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 
@@ -439,8 +439,8 @@ load _helper.bash
   mkdir hooks
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 
@@ -466,8 +466,8 @@ load _helper.bash
   touch .lagoon.yml
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 
@@ -493,8 +493,8 @@ load _helper.bash
   rm -Rf renovate.json
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_contains "It looks like Vortex is already installed into this project"
 
   assert_git_repo
 

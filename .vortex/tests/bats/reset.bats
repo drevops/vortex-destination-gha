@@ -219,7 +219,7 @@ load _helper.bash
   mktouch "composer.lock"
   mktouch "web/themes/custom/star_wars/package-lock.json"
 
-  git_add_all_commit "Added DrevOps files"
+  git_add_all_commit "Added Vortex files"
 
   mktouch "uncommitted_file.txt"
 

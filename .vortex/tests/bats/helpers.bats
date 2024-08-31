@@ -1,12 +1,12 @@
 #!/usr/bin/env bats
 #
-# Tests for DrevOps Bats helpers.
+# Tests for Vortex Bats helpers.
 #
 # shellcheck disable=SC2129
 
 load _helper.bash
 
-@test "helper_drevops" {
+@test "helper_vortex" {
   echo "     > Bats version: ${BATS_VERSION}" >&3
 
   [ "${BATS_TMPDIR}" != "" ]

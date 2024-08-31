@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Helpers related to DrevOps deployment testing functionality.
+# Helpers related to Vortex deployment testing functionality.
 #
 
 assert_deployment_files_present() {
@@ -131,7 +131,7 @@ install_and_build_site() {
   fi
 
   step "Add all files to new git repo"
-  git_add_all_commit "Init DrevOps config" "${dir}"
+  git_add_all_commit "Init Vortex config" "${dir}"
 
   if [ "${should_build:-}" = "1" ]; then
     step "Build project"

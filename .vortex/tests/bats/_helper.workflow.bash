@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154,SC2129
 #
-# Helpers related to DrevOps workflow testing functionality.
+# Helpers related to Vortex workflow testing functionality.
 #
 
 prepare_sut() {
@@ -29,8 +29,8 @@ prepare_sut() {
   assert_files_present_integration_renovatebot
   assert_git_repo
 
-  substep "Add all DrevOps files to new git repo"
-  git_add_all_commit "Init DrevOps config"
+  substep "Add all Vortex files to new git repo"
+  git_add_all_commit "Init Vortex config"
 
   substep "Create IDE config file"
   mkdir -p .idea
@@ -754,7 +754,7 @@ assert_ahoy_reset() {
   assert_dir_exists ".logs/screenshots"
 
   ahoy reset
-  # Assert that initial DrevOps files have not been removed.
+  # Assert that initial Vortex files have not been removed.
   assert_files_present_common "" "" "" "" "" "${webroot}"
   assert_files_present_deployment
   assert_files_present_no_integration_acquia "" "" "${webroot}"

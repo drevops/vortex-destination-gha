@@ -111,7 +111,7 @@ load _helper.bash
   git_add_all_commit "Second commit"
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
   assert_output_contains "Existing committed files will be modified."
 
   # Assert no changes were made.
@@ -132,7 +132,7 @@ load _helper.bash
   assert_file_not_contains ".env" 'SOMEVAR="someval"'
 }
 
-@test "Install into existing: git project; no Vortex; adding DrevOps and updating DrevOps" {
+@test "Install into existing: git project; no Vortex; adding Vortex and updating Vortex" {
   # Add custom files
   touch "test1.txt"
   # File resides in directory that is included in Vortex when initialised.
@@ -154,7 +154,7 @@ load _helper.bash
 
   install_dependencies_stub
 
-  git_add_all_commit "Init DrevOps"
+  git_add_all_commit "Init Vortex"
 
   # Assert that custom file preserved.
   assert_file_exists "test1.txt"
@@ -169,7 +169,7 @@ load _helper.bash
   git_add "docker-compose.yml" "${LOCAL_REPO_DIR}"
   echo "# Some change to non-required file" >>"${LOCAL_REPO_DIR}/web/themes/custom/your_site_theme/.eslintrc.json"
   git_add "web/themes/custom/your_site_theme/.eslintrc.json" "${LOCAL_REPO_DIR}"
-  git_commit "New version of DrevOps" "${LOCAL_REPO_DIR}"
+  git_commit "New version of Vortex" "${LOCAL_REPO_DIR}"
 
   # Run install to update to the latest Vortex version.
   run_installer_quiet
@@ -194,8 +194,8 @@ load _helper.bash
   touch ".docker/test2.txt"
 
   output=$(run_installer_quiet)
-  assert_output_contains "WELCOME TO DREVOPS QUIET INSTALLER"
-  assert_output_not_contains "It looks like DrevOps scaffold is already installed into this project"
+  assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   install_dependencies_stub
 

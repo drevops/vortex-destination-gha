@@ -291,7 +291,7 @@ assert_files_not_present_common() {
   assert_file_not_exists ".circleci/config.yml"
   assert_file_not_exists "${webroot}/sites/default/settings.php"
   assert_file_not_exists "${webroot}/sites/default/services.yml"
-  # Scaffolding files not exist.
+  # Drupal scaffold files not exist.
   assert_file_not_exists "${webroot}/.editorconfig"
   assert_file_not_exists "${webroot}/.eslintignore"
   assert_file_not_exists "${webroot}/.gitattributes"
@@ -496,7 +496,7 @@ assert_files_present_drupal() {
   # Comparing binary files.
   assert_binary_files_equal "${LOCAL_REPO_DIR}/web/themes/custom/your_site_theme/screenshot.png" "${webroot}/themes/custom/${suffix}/screenshot.png"
 
-  # Drupal scaffolding files exist.
+  # Drupal scaffold files exist.
   assert_file_exists "${webroot}/.editorconfig"
   assert_file_exists "${webroot}/.eslintignore"
   assert_file_exists "${webroot}/.gitattributes"

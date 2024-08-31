@@ -42,7 +42,7 @@ setup() {
   export BATS_LIB_PATH="${BATS_TEST_DIRNAME}/../node_modules"
 
   # Load 'bats-helpers' library.
-  ASSERT_DIR_EXCLUDE=("drevops" "vortex" ".data")
+  ASSERT_DIR_EXCLUDE=("vortex" ".data")
   export ASSERT_DIR_EXCLUDE
   bats_load_library bats-helpers
 

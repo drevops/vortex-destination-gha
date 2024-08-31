@@ -76,7 +76,7 @@ load _helper.bash
   echo VORTEX_INSTALL_COMMIT="${commit1}" >>.env
   run_installer_quiet
   assert_git_repo
-  assert_output_contains "This will install Vortex scaffold into your project at commit"
+  assert_output_contains "This will install Vortex into your project at commit"
   assert_output_contains "Downloading Vortex"
   assert_output_contains "at ref \"${commit1}\""
 
@@ -161,7 +161,7 @@ load _helper.bash
 @test "Install into empty directory: quiet; should NOT show that Vortex was previously installed" {
   output=$(run_installer_quiet)
   assert_output_contains "WELCOME TO VORTEX QUIET INSTALLER"
-  assert_output_not_contains "It looks like Vortex scaffold is already installed into this project"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   assert_files_present
   assert_git_repo
@@ -193,7 +193,7 @@ load _helper.bash
   )
   output=$(run_installer_interactive "${answers[@]}")
   assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
-  assert_output_not_contains "It looks like Vortex scaffold is already installed into this project"
+  assert_output_not_contains "It looks like Vortex is already installed into this project"
 
   assert_files_present
   assert_git_repo

@@ -353,7 +353,7 @@ load _helper.bash
 
   output=$(run_installer_interactive "${answers[@]}")
   assert_output_contains "WELCOME TO VORTEX INTERACTIVE INSTALLER"
-  assert_output_contains "It looks like Vortex scaffold is already installed into this project."
+  assert_output_contains "It looks like Vortex is already installed into this project."
   assert_output_contains "Aborting project installation. No files were changed"
 
   # Note that user input takes precedence over discovered values.

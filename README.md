@@ -137,7 +137,7 @@ The documentation is authored within this repository in the `.vortex/docs` direc
 
 It is published to [https://docs.drevops.com](https://docs.drevops.com) on Vortex release.
 
-Development version of the documentation is available at [https://drevops-vortex-docs.netlify.app/](https://drevops-vortex-docs.netlify.app/).
+Development version of the documentation is available at [https://vortex-docs.netlify.app/](https://vortex-docs.netlify.app/).
 
 ## Support
 

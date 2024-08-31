@@ -67,4 +67,4 @@ to DrevOps progress. Remove this section once onboarding is finished.
 - [Deployment](docs/deployment.md)
 
 ---
-_This repository was created using the [DrevOps Vortex](https://github.com/drevops/scaffold) project template_
+_This repository was created using the [Vortex](https://github.com/drevops/scaffold) project template_

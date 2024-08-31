@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ##
-# Update DrevOps Vortex.
+# Update Vortex.
 #
 # shellcheck disable=SC1090,SC1091
 

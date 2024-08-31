@@ -60,7 +60,7 @@ setup() {
   export TEST_VORTEX_CONTAINER_REGISTRY_PASS="${TEST_VORTEX_CONTAINER_REGISTRY_PASS:-}"
 
   # The installer reference to use for tests.
-  export TEST_INSTALLER_REF="${TEST_INSTALLER_REF:-main}"
+  export TEST_INSTALLER_REF="feature/rename-to-vortex"
 
   # Preflight checks.
   # @formatter:off

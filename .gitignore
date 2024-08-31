@@ -39,10 +39,10 @@ web/sites/default/*
 !web/robots.txt
 !web/update.php
 
-#;< SCAFFOLD_DEV
+#;< VORTEX_DEV
 #; Ignore these files in Vortex itself, but do not ignore in consumer site.
 /composer.lock
-#;> SCAFFOLD_DEV
+#;> VORTEX_DEV
 
 # Ignore dependencies cache files.
 /vendor

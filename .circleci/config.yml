@@ -415,7 +415,7 @@ jobs:
   #;============================================================================
   #; Vortex development section. Removed during Vortex installation/update.
   #;============================================================================
-  #;< SCAFFOLD_DEV
+  #;< VORTEX_DEV
   #-----------------------------------------------------------------------------
   # Test suite for Vortex.
   #-----------------------------------------------------------------------------
@@ -431,7 +431,7 @@ jobs:
 
       - run:
           name: Run CircleCI tests (long)
-          command: SCAFFOLD_DEV_VOLUMES_MOUNTED=0 SCAFFOLD_DEV_TEST_COVERAGE_DIR=/tmp/artifacts/coverage .vortex/tests/test.postbuild.sh
+          command: VORTEX_DEV_VOLUMES_MOUNTED=0 VORTEX_DEV_TEST_COVERAGE_DIR=/tmp/artifacts/coverage .vortex/tests/test.postbuild.sh
 
       - store_test_results:
           path: *test_results
@@ -527,7 +527,7 @@ jobs:
       # the main workflow are separated from this one.
       VORTEX_CI_DB_CACHE_BRANCH: vortex-dev-didi-ii
   #=============================================================================
-  #;> SCAFFOLD_DEV
+  #;> VORTEX_DEV
 
 ################################################################################
 # WORKFLOWS
@@ -588,7 +588,7 @@ workflows:
   #; Vortex development section. Removed during Vortex installation/update.
   #;============================================================================
   #;
-  #;< SCAFFOLD_DEV
+  #;< VORTEX_DEV
   # Run functional tests for Vortex.
   # Note that these jobs must run within the "commit" workflow, because they
   # depend on the "build" job.
@@ -616,7 +616,7 @@ workflows:
           requires:
             - vortex-dev-database-ii
   #=============================================================================
-  #;> SCAFFOLD_DEV
+  #;> VORTEX_DEV
 
   #;< !PROVISION_USE_PROFILE
   # Nightly database workflow runs overnight to capture fresh database and cache it.

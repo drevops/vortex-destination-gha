@@ -8,9 +8,9 @@ prepare_sut() {
   step "Run SUT preparation: ${1}"
   local webroot="${2:-web}"
 
-  SCAFFOLD_DEV_VOLUMES_MOUNTED=${SCAFFOLD_DEV_VOLUMES_MOUNTED:-1}
+  VORTEX_DEV_VOLUMES_MOUNTED=${VORTEX_DEV_VOLUMES_MOUNTED:-1}
 
-  assert_not_empty "${SCAFFOLD_DEV_VOLUMES_MOUNTED}"
+  assert_not_empty "${VORTEX_DEV_VOLUMES_MOUNTED}"
 
   assert_files_not_present_common "" "" "" "${webroot}"
 

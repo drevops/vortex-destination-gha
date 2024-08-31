@@ -81,7 +81,7 @@ setup() {
   # Root build directory where the rest of fixture directories located.
   # The "build" in this context is a place to store assets produced by the
   # installer script during the test.
-  export BUILD_DIR="${BUILD_DIR:-"${BATS_TEST_TMPDIR//\/\//\/}/drevops-$(date +%s)"}"
+  export BUILD_DIR="${BUILD_DIR:-"${BATS_TEST_TMPDIR//\/\//\/}/vortex-$(date +%s)"}"
 
   # Directory where the installer script is executed.
   # May have existing project files (e.g. from previous installations) or be
@@ -249,7 +249,7 @@ assert_files_present_common() {
   assert_file_contains .env "VORTEX_PROJECT=${suffix}"
 
   # Assert that Vortex version was replaced.
-  assert_file_contains "README.md" "badge/DrevOps-${VORTEX_VERSION:-develop}-blue.svg"
+  assert_file_contains "README.md" "badge/Vortex-${VORTEX_VERSION:-develop}-blue.svg"
   assert_file_contains "README.md" "https://github.com/drevops/scaffold/tree/${VORTEX_VERSION:-develop}"
   assert_file_not_contains "README.md" "The following list includes"
   assert_file_not_exists "README.dist.md"

@@ -206,7 +206,7 @@ load _helper.bash
 
   # Assert that DrevOps version was replaced.
   assert_file_contains "README.md" "https://github.com/drevops/scaffold/tree/1.2.3"
-  assert_file_contains "README.md" "badge/DrevOps-1.2.3-blue.svg"
+  assert_file_contains "README.md" "badge/Vortex-1.2.3-blue.svg"
 }
 
 @test "Install into empty directory; db from curl, storage is database import" {

@@ -241,7 +241,7 @@ load _helper.bash
   assert_file_contains ".env" "VORTEX_DB_IMAGE=drevops/drevops-mariadb-drupal-data-demo-10.x:latest"
 }
 
-@test "Install into empty directory; DrevOps scripts are not modified" {
+@test "Install into empty directory; Vortex scripts are not modified" {
   run_installer_quiet "${DST_PROJECT_DIR}"
 
   assert_files_present "${DST_PROJECT_DIR}" "dst" "ds" "Ds" "Dst"

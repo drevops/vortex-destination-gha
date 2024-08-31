@@ -22,7 +22,7 @@
     <exclude-pattern>*/web/modules/custom/*/*.install</exclude-pattern>
 
     <!-- #;< SCAFFOLD_DEV -->
-    <exclude-pattern>*/.scaffold/*</exclude-pattern>
+    <exclude-pattern>*/.vortex/*</exclude-pattern>
     <!-- #;> SCAFFOLD_DEV -->
 
     <rule ref="rulesets/unusedcode.xml"/>

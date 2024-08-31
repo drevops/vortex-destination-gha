@@ -5,7 +5,7 @@
 # To add an override file, explicitly un-ignore it below and add to the
 # repository (useful for robots.txt and .htaccess file overrides).
 
-#; To simplify maintenance of Scaffold, we support only 'web' document root
+#; To simplify maintenance of Vortex, we support only 'web' document root
 #; defined explicitly here.
 web/*
 !web/sites/
@@ -40,7 +40,7 @@ web/sites/default/*
 !web/update.php
 
 #;< SCAFFOLD_DEV
-#; Ignore these files in Scaffold itself, but do not ignore in consumer site.
+#; Ignore these files in Vortex itself, but do not ignore in consumer site.
 /composer.lock
 #;> SCAFFOLD_DEV
 

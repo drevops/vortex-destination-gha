@@ -13,7 +13,7 @@ Drupal 10 implementation of YOURSITE for YOURORG
 
 [//]: # (DO NOT REMOVE THE BADGE BELOW. IT IS USED BY DREVOPS TO TRACK INTEGRATION)
 
-[![DrevOps](https://img.shields.io/badge/DrevOps-DREVOPS_VERSION_URLENCODED-blue.svg)](https://github.com/drevops/scaffold/tree/DREVOPS_VERSION)
+[![DrevOps](https://img.shields.io/badge/DrevOps-VORTEX_VERSION_URLENCODED-blue.svg)](https://github.com/drevops/scaffold/tree/VORTEX_VERSION)
 
 ## Onboarding to DrevOps
 Use [Onboarding checklist](docs/onboarding.md) to track the project onboarding
@@ -34,7 +34,7 @@ to DrevOps progress. Remove this section once onboarding is finished.
   1. Create your Acquia Cloud API token:<br/>
      Acquia Cloud UI -> Account -> API tokens -> Create Token
   2. Copy `.env.local.default` to `.env.local`.
-  3. Populate `$DREVOPS_ACQUIA_KEY` and `$DREVOPS_ACQUIA_SECRET` environment
+  3. Populate `$VORTEX_ACQUIA_KEY` and `$VORTEX_ACQUIA_SECRET` environment
      variables in `.env.local` file with values generated in the step above.
 
 [//]: # (#;> ACQUIA)
@@ -44,7 +44,7 @@ to DrevOps progress. Remove this section once onboarding is finished.
 - Authenticate with Lagoon
   1. Create an SSH key and add it to your account in the [Lagoon Dashboard](https://ui-lagoon-master.ch.amazee.io/).
   2. Copy `.env.local.default` to `.env.local`.
-  3. Update `$DREVOPS_DB_DOWNLOAD_SSH_FILE` environment variable in `.env.local` file
+  3. Update `$VORTEX_DB_DOWNLOAD_SSH_FILE` environment variable in `.env.local` file
      with the path to the SSH key.
 
 [//]: # (#;> LAGOON)
@@ -67,4 +67,4 @@ to DrevOps progress. Remove this section once onboarding is finished.
 - [Deployment](docs/deployment.md)
 
 ---
-_This repository was created using the [DrevOps Scaffold](https://github.com/drevops/scaffold) project template_
+_This repository was created using the [DrevOps Vortex](https://github.com/drevops/scaffold) project template_

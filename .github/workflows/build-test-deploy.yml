@@ -240,6 +240,8 @@ jobs:
 
       - name: Build stack
         run: docker compose up -d
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Export built codebase
         if: matrix.instance == 0
@@ -254,6 +256,8 @@ jobs:
             if [ -n \"${GITHUB_TOKEN:-}\" ]; then export COMPOSER_AUTH='{\"github-oauth\": {\"github.com\": \"${GITHUB_TOKEN-}\"}}'; fi && \
             COMPOSER_MEMORY_LIMIT=-1 composer --ansi install --prefer-dist"
           docker compose exec $(env | cut -f1 -d= | sed 's/^/-e /') -T cli bash -c "yarn install --frozen-lockfile"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Validate Composer configuration is normalized
         if: ${{ matrix.instance == 0 || strategy.job-total == 1 }}

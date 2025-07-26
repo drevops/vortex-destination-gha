@@ -108,9 +108,15 @@ trait StepPrepareSutTrait {
         'Initial Ahoy command to provision the container should exist in .ahoy.yml'
       );
 
+      // Replace the command to provision the container with a command that
+      // checks for the database file and copies it to the container if it
+      // exists.
+      // Provision script may be called from multiple sections of the .ahoy.yml
+      // file, so we need to ensure that we only modify the one in
+      // the 'provision' section.
       File::replaceContent('.ahoy.yml',
-        'ahoy cli ./scripts/vortex/provision.sh',
-        'if [ -f .data/db.sql ]; then docker compose exec cli mkdir -p .data; docker compose cp -L .data/db.sql cli:/app/.data/db.sql; fi; ahoy cli ./scripts/vortex/provision.sh',
+        '      ahoy cli ./scripts/vortex/provision.sh',
+        '      if [ -f .data/db.sql ]; then docker compose exec cli mkdir -p .data; docker compose cp -L .data/db.sql cli:/app/.data/db.sql; fi; ahoy cli ./scripts/vortex/provision.sh',
       );
     }
   }

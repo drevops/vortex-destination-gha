@@ -29,9 +29,9 @@ setup() {
   # if bash uses Rosetta or other emulators, in which case the test should run
   # with the variable explicitly set.
   # LCOV_EXCL_START
-  if [ "$(uname -m)" = "arm64" ] || [ "$(uname -m)" = "aarch64" ]; then
-    export DOCKER_DEFAULT_PLATFORM="${DOCKER_DEFAULT_PLATFORM:-linux/amd64}"
-  fi
+#  if [ "$(uname -m)" = "arm64" ] || [ "$(uname -m)" = "aarch64" ]; then
+#    export DOCKER_DEFAULT_PLATFORM="${DOCKER_DEFAULT_PLATFORM:-linux/amd64}"
+#  fi
 
   if [ -n "${DOCKER_DEFAULT_PLATFORM:-}" ]; then
     if [ "${BATS_VERBOSE_RUN:-}" = "1" ] || [ "${TEST_VORTEX_DEBUG:-}" = "1" ]; then

@@ -142,7 +142,9 @@ commands:
 
   provision:
     usage: Provision a site from the database dump or profile.
-    cmd: ahoy cli ./scripts/vortex/provision.sh
+    cmd: |
+      ahoy confirm "Running this command will remove your current database. Are you sure?" &&
+      ahoy cli ./scripts/vortex/provision.sh
 
   export-db:
     usage: Export database dump or database image (if VORTEX_DB_IMAGE variable is set).
@@ -209,8 +211,7 @@ commands:
 
   lint-tests:
     usage: Lint tests code.
-    cmd: |
-      ahoy cli vendor/bin/gherkinlint lint tests/behat/features
+    cmd: ahoy cli vendor/bin/gherkinlint lint tests/behat/features
 
   lint-fix:
     usage: Fix lint issues of back-end and front-end code.
@@ -279,14 +280,29 @@ commands:
   # ----------------------------------------------------------------------------
   # Utilities.
   # ----------------------------------------------------------------------------
+
+  # Internal utility command to confirm actions before running them.
+  # Accepts a message as an argument and waits for user confirmation.
+  # Will proceed only if the user types 'y' or 'true'.
+  # If AHOY_CONFIRM_RESPONSE is set, it will use that value without prompting
+  # the user, and will print the prompt with an answer. It will also give a
+  # 3 seconds delay before proceeding to allow the user to cancel the operation.
+  # If AHOY_CONFIRM_WAIT_SKIP is also set to '1', it will skip the wait and
+  # proceed immediately.
   confirm:
     cmd: |
       if [ -z "${AHOY_CONFIRM_RESPONSE}" ]; then
         read -r -p ">> $1 [y/N] " AHOY_CONFIRM_RESPONSE
-        [ "${AHOY_CONFIRM_RESPONSE}" = "y" ] || [ "${AHOY_CONFIRM_RESPONSE}" = true ] || ( echo "The operation was canceled." && exit 1 )
+        if [ "${AHOY_CONFIRM_RESPONSE}" != "y" ] && [ "${AHOY_CONFIRM_RESPONSE}" != "true" ]; then
+          echo "The operation was canceled."
+          exit 1
+        fi
       else
-        echo ">> $1 [y/N] ${AHOY_CONFIRM_RESPONSE}" \
-        && if [ "${AHOY_CONFIRM_WAIT_SKIP}" != "1" ]; then echo "Waiting for 3 seconds... Press Ctrl+C to cancel."; sleep 3; fi
+        if [ "${AHOY_CONFIRM_WAIT_SKIP}" != "1" ]; then
+          echo ">> $1 [y/N] ${AHOY_CONFIRM_RESPONSE}"
+          echo "Waiting for 3 seconds... Press Ctrl+C to cancel."
+          sleep 3
+        fi
       fi
     hide: true
 

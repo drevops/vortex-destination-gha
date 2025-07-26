@@ -16,6 +16,7 @@ commands:
   build:
     usage: Build or rebuild the project.
     cmd: |
+      ahoy confirm "All containers, build files and database will be removed. Proceed?" && export AHOY_CONFIRM_RESPONSE=y && export AHOY_CONFIRM_WAIT_SKIP=1 || exit 0
       ahoy reset                          # Reset the project.
       ahoy up --build --force-recreate    # Start the stack.
       ahoy composer install               # Install Composer dependencies.
@@ -55,7 +56,7 @@ commands:
   down:
     usage: Stop and remove containers, images, volumes and networks.
     cmd: |
-      ahoy confirm "Running this command will remove your current database. Are you sure?" &&
+      ahoy confirm "Running this command will remove your current database. Are you sure?" || exit 0
       if [ -f "docker-compose.yml" ]; then docker compose down --remove-orphans --volumes > /dev/null 2>&1; fi
 
   start:
@@ -111,8 +112,7 @@ commands:
   # ----------------------------------------------------------------------------
 
   login:
-    usage: Login to a website.
-    # Unblock user 1 and generate a one time login link.
+    usage: Unblock user 1 and generate a one time login link.
     cmd: ahoy cli ./scripts/vortex/login.sh
 
   download-db:
@@ -123,7 +123,7 @@ commands:
   reload-db:
     usage: Reload the database container using local database image.
     cmd: |
-      ahoy confirm "Running this command will replace your current database. Are you sure?" &&
+      ahoy confirm "Running this command will replace your current database. Are you sure?" || exit 0
       docker compose rm --force --stop --volumes database && \
         ahoy up -- --build database && \
         ahoy up wait_dependencies && \
@@ -134,7 +134,7 @@ commands:
   provision:
     usage: Provision a site from the database dump or profile.
     cmd: |
-      ahoy confirm "Running this command will remove your current database. Are you sure?" &&
+      ahoy confirm "Running this command will remove your current database. Are you sure?" || exit 0
       ahoy cli ./scripts/vortex/provision.sh
 
   export-db:
@@ -152,8 +152,9 @@ commands:
   reset:
     usage: "Remove containers, all build files. Use with `hard` to reset repository to the last commit."
     cmd: |
-      ahoy confirm "All containers and build files will be removed. Proceed?" &&
-      AHOY_CONFIRM_RESPONSE=y ahoy down && ./scripts/vortex/reset.sh "$@"
+      ahoy confirm "All containers and build files will be removed. Proceed?" || exit 0
+      AHOY_CONFIRM_RESPONSE=y ahoy down
+      ./scripts/vortex/reset.sh "$@"
 
   fei:
     usage: Install front-end assets.
@@ -220,15 +221,15 @@ commands:
     cmd: ahoy test-unit && ahoy test-kernel && ahoy test-functional && ahoy test-bdd
 
   test-unit:
-    usage: Run PhpUnit unit tests.
+    usage: Run PHPUnit unit tests.
     cmd: ahoy cli vendor/bin/phpunit --testsuite=unit "$@"
 
   test-kernel:
-    usage: Run PhpUnit kernel tests.
+    usage: Run PHPUnit kernel tests.
     cmd: ahoy cli vendor/bin/phpunit --testsuite=kernel "$@"
 
   test-functional:
-    usage: Run PhpUnit functional tests.
+    usage: Run PHPUnit functional tests.
     cmd: ahoy cli vendor/bin/phpunit --testsuite=functional "$@"
 
   test-bdd:
@@ -243,7 +244,7 @@ commands:
   deploy:
     usage: Run remote deployment procedures.
     cmd: |
-      ahoy confirm "Deployment usually runs in CI. Are you sure you want to proceed with manual deployment? (Run as ahoy deploy [type1,[type2..]], where [type] is 'code', 'container_registry', 'webhook')" &&
+      ahoy confirm "Deployment usually runs in CI. Are you sure you want to proceed with manual deployment? (Run as ahoy deploy [type1,[type2..]], where [type] is 'code', 'container_registry', 'webhook')" || exit 0
       ./scripts/vortex/deploy.sh "$@"
 
   doctor:

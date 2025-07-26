@@ -87,6 +87,7 @@ The following environment variables can be added in the environment to
 customize test execution:
 
 - `TEST_VORTEX_DEBUG=1` - Enable debug output
+- `TEST_VORTEX_VERBOSE=1` - Enable debug output in PHPUnit tests
 - `TEST_NODE_INDEX` - CI runner index for parallel execution
 - `VORTEX_DEV_TEST_COVERAGE_DIR` - Coverage output directory
 - `TEST_PACKAGE_TOKEN` - GitHub token used for integration tests

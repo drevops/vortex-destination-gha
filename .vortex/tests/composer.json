@@ -28,14 +28,17 @@
     "prefer-stable": true,
     "autoload-dev": {
         "psr-4": {
-            "DrevOps\\Vortex\\Tests\\": "phpunit/",
-            "AlexSkrypnyk\\File\\Tests\\": "vendor/alexskrypnyk/file/tests/"
+            "AlexSkrypnyk\\File\\Tests\\": "vendor/alexskrypnyk/file/tests/",
+            "DrevOps\\Vortex\\Tests\\": "phpunit/"
         }
     },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "ergebnis/composer-normalize": true
+        },
+        "config": {
+            "process-timeout": 600
         },
         "discard-changes": true,
         "sort-packages": true

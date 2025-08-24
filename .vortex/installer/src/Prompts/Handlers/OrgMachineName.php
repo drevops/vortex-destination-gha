@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DrevOps\VortexInstaller\Prompts\Handlers;
 
-use DrevOps\VortexInstaller\Utils\ComposerJson;
+use DrevOps\VortexInstaller\Utils\ComposerManipulator;
 use DrevOps\VortexInstaller\Utils\Converter;
 use DrevOps\VortexInstaller\Utils\File;
 
@@ -53,7 +53,8 @@ class OrgMachineName extends AbstractHandler {
    * {@inheritdoc}
    */
   public function discover(): null|string|bool|array {
-    $v = ComposerJson::fromFile($this->dstDir . '/composer.json')?->getProperty('name');
+    $v = ComposerManipulator::fromFile($this->dstDir . '/composer.json')?->getProperty('name');
+
     if ($v && preg_match('/([^\/]+)\/(.+)/', (string) $v, $matches) && !empty($matches[1])) {
       return $matches[1];
     }

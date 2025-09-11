@@ -97,6 +97,11 @@ cp -a "${VORTEX_DEPLOY_ARTIFACT_ROOT}"/.git "${VORTEX_DEPLOY_ARTIFACT_SRC}" || t
 task "Copying deployment .gitignore as it may not exist in deploy code source files."
 cp -a "${VORTEX_DEPLOY_ARTIFACT_ROOT}"/.gitignore.artifact "${VORTEX_DEPLOY_ARTIFACT_SRC}" || true
 
+cd "${VORTEX_DEPLOY_ARTIFACT_SRC}"
+git config core.filemode
+git config core.filemode true
+cd -
+
 task "Running artifact builder."
 # Add --debug to debug any deployment issues.
 "${HOME}/.composer/vendor/bin/git-artifact" "${VORTEX_DEPLOY_ARTIFACT_GIT_REMOTE}" \

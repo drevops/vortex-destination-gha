@@ -1,0 +1,21 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - DrevOps\BehatScreenshotExtension\Context\ScreenshotContext
+  extensions:
+    DrevOps\BehatScreenshotExtension:
+      dir: %paths.base%/screenshots
+      on_failed: true
+      purge: false
+      always_fullscreen: false
+      fullscreen_algorithm: resize # 'stitch' (only if GD ext available) or 'resize'
+      info_types:
+        - url
+        - feature
+        - step
+        - datetime
+      failed_prefix: failed_
+      filename_pattern: '{datetime:u}.{feature_file}.feature_{step_line}.{ext}'
+      filename_pattern_failed: '{datetime:u}.{failed_prefix}{feature_file}.feature_{step_line}.{ext}'

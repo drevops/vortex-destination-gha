@@ -1,0 +1,76 @@
+{
+    "name": "drevops/behat-screenshot",
+    "description": "Behat extension and step definitions to create HTML and image screenshots on demand or when tests fail",
+    "license": "GPL-2.0-or-later",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alex Skrypnyk",
+            "email": "alex@drevops.com",
+            "homepage": "https://drevops.com",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "behat/behat": "^3.13.0",
+        "friends-of-behat/mink-extension": "^2.7",
+        "symfony/finder": "^6.4 || ^7.0",
+        "symfony/http-client": "^6.0 || ^7.0"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8",
+        "behat/mink-browserkit-driver": "^2.2",
+        "dantleech/gherkin-lint": "^0.2.3",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1",
+        "dmore/behat-chrome-extension": "^1.4",
+        "drevops/behat-phpserver": "^2.0",
+        "drupal/coder": "^8.3",
+        "dvdoug/behat-code-coverage": "^5.3",
+        "ergebnis/composer-normalize": "^2.44",
+        "escapestudios/symfony2-coding-standard": "^3",
+        "lullabot/mink-selenium2-driver": "^1.7",
+        "lullabot/php-webdriver": "^2.0.4",
+        "mikey179/vfsstream": "^1.6",
+        "opis/closure": "^4.0",
+        "php-mock/php-mock-phpunit": "^2.13",
+        "phpstan/phpstan": "^2",
+        "phpunit/phpunit": "^11",
+        "rector/rector": "^2",
+        "symfony/process": "^6.4 || ^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DrevOps\\BehatScreenshotExtension\\": "src/DrevOps/BehatScreenshotExtension"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DrevOps\\BehatScreenshot\\Tests\\": "tests/phpunit"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint": [
+            "phpcs",
+            "phpstan",
+            "rector --clear-cache --dry-run",
+            "gherkinlint lint tests/behat/features"
+        ],
+        "lint-fix": [
+            "rector --clear-cache",
+            "phpcbf"
+        ],
+        "reset": "rm -Rf vendor vendor-bin composer.lock",
+        "test": "phpunit --no-coverage",
+        "test-bdd": "behat --colors",
+        "test-coverage": "phpunit"
+    }
+}

@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+use DTL\GherkinLint\GherkinLintContainer;
+use DTL\GherkinLint\Model\ConfigLoader;
+use DTL\GherkinLint\Model\ConfigMapper;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+if (is_file(__DIR__ . '/../vendor/autoload.php')) {
+    $autoloader = require __DIR__ . '/../vendor/autoload.php';
+} elseif (is_file(__DIR__ . '/../../../autoload.php')) {
+    $autoloader = require __DIR__ . '/../../../autoload.php';
+} else {
+    echo 'Cannot find the vendor directory, have you executed composer install?' . PHP_EOL;
+    echo 'See https://getcomposer.org to get Composer.' . PHP_EOL;
+    exit(1);
+}
+
+$input = new ArgvInput();
+$output = new ConsoleOutput();
+$config = ConfigLoader::create(
+    $output->getErrorOutput(),
+    getcwd()
+)->load('gherkinlint.json');
+$container = new GherkinLintContainer($output, $config, getenv('GHERKINLINT_DEV', true));
+$container->application()->run($input, $output);
+
+
+
+

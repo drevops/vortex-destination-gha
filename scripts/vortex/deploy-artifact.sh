@@ -104,12 +104,12 @@ cd -
 
 task "Running artifact builder."
 # Add --debug to debug any deployment issues.
-"${HOME}/.composer/vendor/bin/git-artifact" "${VORTEX_DEPLOY_ARTIFACT_GIT_REMOTE}" \
-  --root="${VORTEX_DEPLOY_ARTIFACT_ROOT}" \
-  --src="${VORTEX_DEPLOY_ARTIFACT_SRC}" \
-  --branch="${VORTEX_DEPLOY_ARTIFACT_DST_BRANCH}" \
-  --gitignore="${VORTEX_DEPLOY_ARTIFACT_SRC}"/.gitignore.artifact \
-  --log="${VORTEX_DEPLOY_ARTIFACT_LOG}" \
+"${HOME}/.composer/vendor/bin/git-artifact" "git@github.com:drevops/vortex-destination-gha.git" \
+  --root="/Users/o_o/www/drevops/vortex2" \
+  --src="/Users/o_o/www/drevops/vortex2" \
+  --branch="feature/fix-artifact-exec-bit-2" \
+  --gitignore="/Users/o_o/www/drevops/vortex2"/.gitignore.artifact \
+  --no-cleanup \
   -vvv
 
 pass "Finished ARTIFACT deployment."

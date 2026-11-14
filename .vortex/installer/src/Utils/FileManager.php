@@ -233,7 +233,9 @@ class FileManager {
     $this->recordChanges($src, $report);
 
     if (File::isDir($src) && !File::dirIsEmpty($src)) {
-      File::copy($src, $destination);
+      // $src is removed after the install, and Windows reads symlink targets
+      // as absolute paths into it, so the targets are kept relative.
+      File::copy($src, $destination, symlink_mode: File::SYMLINK_MODE_RELATIVE);
       $this->recordFailedCopies($src, $report);
     }
 
